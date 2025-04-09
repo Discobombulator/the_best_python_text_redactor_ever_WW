@@ -16,6 +16,6 @@ def main_scene(std, text_type):
                    если ничего нету
               """
 
-        res = is_program_end(std,text_type)
-        if res =="exit":
+        res = is_program_end(std, text_type)
+        if res == "exit":
             return "exit"

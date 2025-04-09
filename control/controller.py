@@ -10,6 +10,7 @@ def start_controller(std):
     elif key in [ord('q'), ord('й')]:
         return "exit"
 
+
 def main_controller(std):
     key = std.getch()
     if key == curses.ascii.ctrl(83) or key == curses.ascii.ctrl(115):
@@ -21,12 +22,14 @@ def main_controller(std):
     elif key == curses.ascii.ctrl(81) or key == curses.ascii.ctrl(113):
         return "exit_no_save"
 
+
 def no_save_check(std):
     key = std.getch()
     if key in [ord('1'), ord('!')]:
         return "exit"
     elif key in [ord('2'), ord('@')]:
         return "no_exit"
+
 
 def logic_controller(std):
     """TODO:
