@@ -1,15 +1,14 @@
 from control.controller import no_save_check
+from logic.read_texts import read_cnf
 
 
 def exit_no_save(std):
     std.clear()
 
-    std.addstr(1, 0, "Вы уверены что хотите выйти без сохранения?")
-    std.addstr(2, 0, "_________________________________________")
-    std.addstr(3, 0, "1 - Да")
-    std.addstr(4, 0, "2 - Нет")
-    std.addstr(6, 0, "                                         ")
-    std.addstr(7, 0, "Ваш ответ:")
+    lines = read_cnf("exit_no_save_text")
+
+    for i in range(len(lines)):
+        std.addstr(i, 0, lines[i])
 
     res = no_save_check(std)
     if res == "exit":
