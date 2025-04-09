@@ -3,7 +3,7 @@ from logic.read_texts import read_cnf
 from visual.exit_and_save_scene import exit_no_save
 
 
-def main_scene(std, type_text):
+def main_scene(std, text_type):
     lines = read_cnf("main_scene")
 
     while True:
@@ -17,19 +17,19 @@ def main_scene(std, type_text):
                    если ничего нету
               """
 
-        type_text = main_controller(std)
-        if type_text == "exit_no_save":
+        end_type = main_controller(std)
+        if end_type == "exit_no_save":
             if exit_no_save(std) == "exit_no_save":
                 return "exit"
-        elif type_text == "save_how":
+        elif end_type == "save_how":
             """TODO:
              сохранение файла с новым названием и продолжение работы
             без выхода"""
-        elif type_text == "save":
-            if type_text == "olf_f":
+        elif end_type == "save":
+            if text_type == "olf_f":
                 """TODO:
                  сохранение файла по старому названию
                 (только для открытых файлов)"""
-        elif type_text == "exit_save":
+        elif end_type == "exit_save":
             """TODO:
              сохранение файла с новым названием и потом выход"""
