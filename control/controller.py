@@ -31,6 +31,13 @@ def no_save_check(std):
         return "no_exit"
 
 
+def new_name_check(std):
+    key = std.getch()
+
+    if key == curses.ascii.ctrl(83) or key == curses.ascii.ctrl(115):
+        return "confirm"
+
+
 def logic_controller(std):
     """TODO:
         Метод для управления редактирования текста

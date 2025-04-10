@@ -15,3 +15,12 @@ def exit_no_save(std):
         return "exit_no_save"
     elif res == "no_exit":
         return
+
+
+def make_file_name_scene(std):
+    std.clear()
+
+    lines = read_cnf("make_file_name_text")
+
+    for i in range(len(lines)):
+        std.addstr(i, 0, lines[i])
