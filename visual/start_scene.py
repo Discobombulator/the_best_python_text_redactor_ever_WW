@@ -1,19 +1,14 @@
 from control.controller import start_controller
+from logic.read_texts import read_cnf
 from visual.main_scene import main_scene
 
 
 def start_scene(std):
+    lines = read_cnf("start_scene")
     std.clear()
 
-    std.addstr(4, 0, "Добро пожаловать в лучший в мире текстовый редактор")
-    std.addstr(5, 0, "_________________________________________")
-    std.addstr(6, 0, "                                         ")
-    std.addstr(7, 0, "Выберите, что вы хотите сделать")
-    std.addstr(8, 0, "1 - Создать новый файл")
-    std.addstr(9, 0, "2 - Открыть существующий")
-    std.addstr(10, 0, "q - Выйти")
-    std.addstr(11, 0, " ")
-    std.addstr(12, 0, "Я хочу: ")
+    for i in range(len(lines)):
+        std.addstr(i+4, 0, lines[i])
 
     std.refresh()
     type_text = start_controller(std)

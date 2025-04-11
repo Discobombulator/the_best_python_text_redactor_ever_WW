@@ -1,13 +1,13 @@
 import argparse
 import curses
 
-
 from visual.start_scene import start_scene
+
+
 def main(std):
     while True:
         if start_scene(std) == "exit":
             break
-
 
 
 if __name__ == "__main__":
