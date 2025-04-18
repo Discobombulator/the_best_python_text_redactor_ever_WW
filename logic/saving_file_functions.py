@@ -11,9 +11,13 @@ def save_text(lines, name):
 
 # saving_file_functions.py (обновленная функция)
 def make_file_name(std):
+    saved_timeout = std.gettimeout()
+    std.timeout(-1)
+
     make_file_name_scene(std)
     name = []
     curses.echo()
+
     while True:
         std.addstr(3, 12, "".join(name))
         key = std.getch()
@@ -29,6 +33,8 @@ def make_file_name(std):
         std.refresh()
 
     curses.noecho()
+    # Восстанавливаем таймаут
+    std.timeout(saved_timeout)
     return "".join(name).strip()
 
 
