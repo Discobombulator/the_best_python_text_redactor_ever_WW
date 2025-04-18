@@ -4,13 +4,18 @@ from visual.exit_and_save_scene import exit_no_save
 
 
 def is_program_end(std, text_type, text, name):
-    end_type = main_controller(std)
+    std.refresh()
 
-    #Выход без сохранения
+    # Используем non-blocking ввод
+    std.nodelay(False)  # Переключаем в режим ожидания клавиши
+    end_type = main_controller(std)
+    std.nodelay(True)  # Возвращаем предыдущий режим
+
+    # Выход без сохранения
     if end_type == "exit_no_save":
         if exit_no_save(std) == "exit_no_save":
             return "exit"
-    #Сохранение с новым названием
+    # Сохранение с новым названием
     elif end_type == "save_how":
         save_text_no_name(std, text)
     # Сохранение по старому названию
@@ -21,3 +26,4 @@ def is_program_end(std, text_type, text, name):
     elif end_type == "exit_save":
         save_text_no_name(std, text)
         return "exit"
+    return None
