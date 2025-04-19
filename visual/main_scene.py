@@ -11,7 +11,6 @@ def main_scene(std, text_type):
     std.keypad(True)
     curses.noecho()
     curses.cbreak()
-    std.timeout(50) # <-- Таймаут 50мс для getch()
 
     lines = read_cnf("main_scene")
     header_h = len(lines)
@@ -23,12 +22,12 @@ def main_scene(std, text_type):
         std.clear()
         std.addstr(prompt_y, 0, "Введите имя файла для открытия (без .txt): ")
         curses.echo()  # Временно включаем echo для ввода имени файла
-        name = std.getstr(prompt_y, 30, 60).decode('utf-8').strip()
+        name = std.getstr(prompt_y, 43, 60).decode('utf-8').strip()
         curses.noecho()
         try:
             with open(f"{name}.txt", "r", encoding="utf-8") as f:
                 text = f.read().splitlines()
-                if not text:  # Если файл пустой
+                if not text:
                     text = [""]
         except FileNotFoundError:
             std.addstr(prompt_y + 2, 0,
