@@ -1,6 +1,5 @@
 import curses
 
-from control.controller import new_name_check
 from visual.exit_and_save_scene import make_file_name_scene
 
 
@@ -9,7 +8,6 @@ def save_text(lines, name):
         f.write("\n".join(lines))
 
 
-# saving_file_functions.py (обновленная функция)
 def make_file_name(std):
     saved_timeout = std.gettimeout()
     std.timeout(-1)
@@ -43,15 +41,21 @@ def save_text_no_name(std, lines):
         f.write("\n".join(lines))
 
 
-# saving_file_functions.py (обновленная функция)
 def make_file_name(std):
     make_file_name_scene(std)
     name = []
-    curses.echo()
+    curses.noecho()
+    std.keypad(True)
+
     while True:
+        std.move(3, 12)
+        std.clrtoeol()
         std.addstr(3, 12, "".join(name))
+        std.refresh()
+
         key = std.getch()
-        if key == curses.KEY_BACKSPACE or key == 127:
+
+        if key in (curses.KEY_BACKSPACE, 127, 8):
             if name:
                 name.pop()
         elif key == curses.KEY_ENTER or key == 10:
@@ -60,7 +64,5 @@ def make_file_name(std):
             break
         elif 32 <= key <= 126:
             name.append(chr(key))
-        std.refresh()
 
-    curses.noecho()
     return "".join(name).strip()

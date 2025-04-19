@@ -13,7 +13,7 @@ def start_scene(std):
     std.clear()
 
     for i in range(len(lines)):
-        std.addstr(i+4, 0, lines[i])
+        std.addstr(i + 4, 0, lines[i])
 
     std.refresh()
     type_text = start_controller(std)

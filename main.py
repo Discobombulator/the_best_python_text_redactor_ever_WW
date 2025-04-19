@@ -16,8 +16,9 @@ def main(std):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Консольная текстовый редактор"
-                                                 "на Python.")
+    parser = argparse.ArgumentParser(
+        description="Консольная текстовый редактор"
+                    "на Python.")
     args = parser.parse_args()
 
     curses.wrapper(main)

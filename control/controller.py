@@ -3,19 +3,11 @@ import curses.ascii
 
 
 def start_controller(std):
-    """
-    Ждём ввода 1, 2 или q/й/ESC для выбора действия в меню.
-    Возвращает 'new_f', 'olf_f' или 'exit'.
-    """
-    # Переключаем клавиатуру в режим чтения специальных клавиш
     std.keypad(True)
     curses.curs_set(0)
 
     while True:
         key = std.getch()
-        # Для отладки можно раскомментировать следующие строки:
-        # std.addstr(0, 0, f"Key: {key:3d}   ")
-        # std.refresh()
 
         if key == ord('1'):
             return "new_f"
@@ -60,7 +52,6 @@ def new_name_check(std):
         return "confirm"
 
 
-# controller.py (дополнение)
 def logic_controller(std, text, cursor_y, cursor_x, key):
     max_y, max_x = std.getmaxyx()
 
@@ -97,7 +88,8 @@ def logic_controller(std, text, cursor_y, cursor_x, key):
     # Backspace
     elif key in (curses.KEY_BACKSPACE, 127, 8):
         if cursor_x > 0:
-            text[cursor_y] = text[cursor_y][:cursor_x - 1] + text[cursor_y][cursor_x:]
+            text[cursor_y] = text[cursor_y][:cursor_x - 1] + text[cursor_y][
+                                                             cursor_x:]
             cursor_x -= 1
         elif cursor_y > 0:
             prev_line_len = len(text[cursor_y - 1])
@@ -111,7 +103,8 @@ def logic_controller(std, text, cursor_y, cursor_x, key):
     elif 32 <= key <= 0x10FFFF:  # Широкий диапазон для Unicode
         try:
             char = chr(key)
-            text[cursor_y] = text[cursor_y][:cursor_x] + char + text[cursor_y][cursor_x:]
+            text[cursor_y] = text[cursor_y][:cursor_x] + char + text[cursor_y][
+                                                                cursor_x:]
             cursor_x += 1
         except:
             pass

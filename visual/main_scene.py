@@ -1,4 +1,3 @@
-# visual/main_scene.py
 import curses
 from logic.read_texts import read_cnf
 from control.controller import logic_controller
