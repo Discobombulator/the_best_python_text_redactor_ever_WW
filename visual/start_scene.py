@@ -1,10 +1,6 @@
 from control.controller import start_controller
 from logic.read_texts import read_cnf
 from visual.main_scene import main_scene
-
-from control.controller import start_controller
-from logic.read_texts import read_cnf
-from visual.main_scene import main_scene
 import curses
 
 

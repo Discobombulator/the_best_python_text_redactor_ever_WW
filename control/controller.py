@@ -52,7 +52,8 @@ def new_name_check(std: curses.window):
         return "confirm"
 
 
-def logic_controller(std: curses.window, text: str, cursor_y: int, cursor_x: int, key: int):
+def logic_controller(std: curses.window, text: str, cursor_y: int,
+                     cursor_x: int, key: int):
     # max_y, max_x = std.getmaxyx()
 
     if key == curses.KEY_UP:
@@ -101,12 +102,9 @@ def logic_controller(std: curses.window, text: str, cursor_y: int, cursor_x: int
 
     # Ввод обычных символов
     elif 32 <= key <= 0x10FFFF:  # Широкий диапазон для Unicode
-        try:
-            char = chr(key)
-            text[cursor_y] = text[cursor_y][:cursor_x] + char + text[cursor_y][
-                                                                cursor_x:]
-            cursor_x += 1
-        except:
-            pass
+        char = chr(key)
+        text[cursor_y] = text[cursor_y][:cursor_x] + char + text[cursor_y][
+                                                            cursor_x:]
+        cursor_x += 1
 
     return text, cursor_y, cursor_x
