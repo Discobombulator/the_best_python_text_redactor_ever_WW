@@ -1,8 +1,10 @@
+import curses
+
 from control.controller import no_save_check
 from logic.read_texts import read_cnf
 
 
-def exit_no_save(std):
+def exit_no_save(std: curses.window):
     std.clear()
 
     lines = read_cnf("exit_no_save_text")
@@ -17,7 +19,7 @@ def exit_no_save(std):
         return
 
 
-def make_file_name_scene(std):
+def make_file_name_scene(std: curses.window):
     std.clear()
 
     lines = read_cnf("make_file_name_text")

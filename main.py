@@ -4,7 +4,7 @@ import curses
 from visual.start_scene import start_scene
 
 
-def main(std):
+def main(std: curses.window):
     try:
         while True:
             if start_scene(std) == "exit":
@@ -22,3 +22,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     curses.wrapper(main)
+
+

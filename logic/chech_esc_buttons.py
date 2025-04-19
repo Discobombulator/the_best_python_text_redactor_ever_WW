@@ -1,9 +1,11 @@
+import curses
+
 from control.controller import main_controller
 from logic.saving_file_functions import save_text, save_text_no_name
 from visual.exit_and_save_scene import exit_no_save
 
 
-def is_program_end(std, text_type, text, name):
+def is_program_end(std: curses.window, text_type: str, text: list[str], name: str):
     # Отключаем таймаут на время проверки выхода
     std.timeout(-1)
     std.nodelay(False)

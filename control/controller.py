@@ -2,7 +2,7 @@ import curses
 import curses.ascii
 
 
-def start_controller(std):
+def start_controller(std: curses.window):
     std.keypad(True)
     curses.curs_set(0)
 
@@ -18,7 +18,7 @@ def start_controller(std):
         # иначе игнорируем и ждём следующего нажатия
 
 
-def main_controller(std):
+def main_controller(std: curses.window):
     # Временно отключаем таймаут для проверки специальных клавиш
     std.timeout(-1)
     key = std.getch()
@@ -36,7 +36,7 @@ def main_controller(std):
     return None
 
 
-def no_save_check(std):
+def no_save_check(std: curses.window):
     std.keypad(True)
     while True:
         key = std.getch()
@@ -46,14 +46,14 @@ def no_save_check(std):
             return "no_exit"
 
 
-def new_name_check(std):
+def new_name_check(std: curses.window):
     key = std.getch()
     if key in (curses.ascii.ctrl(83), curses.ascii.ctrl(115)):
         return "confirm"
 
 
-def logic_controller(std, text, cursor_y, cursor_x, key):
-    max_y, max_x = std.getmaxyx()
+def logic_controller(std: curses.window, text: str, cursor_y: int, cursor_x: int, key: int):
+    # max_y, max_x = std.getmaxyx()
 
     if key == curses.KEY_UP:
         cursor_y = max(0, cursor_y - 1)

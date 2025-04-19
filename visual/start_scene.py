@@ -8,7 +8,7 @@ from visual.main_scene import main_scene
 import curses
 
 
-def start_scene(std):
+def start_scene(std: curses.window):
     lines = read_cnf("start_scene")
     std.clear()
 

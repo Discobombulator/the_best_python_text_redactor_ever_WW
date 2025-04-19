@@ -4,10 +4,11 @@ from control.controller import logic_controller
 from logic.chech_esc_buttons import is_program_end
 
 
-def main_scene(std, text_type):
+def main_scene(std: curses.window, text_type: str):
     # Инициализация curses
     curses.curs_set(1)
     std.keypad(True)
+
     curses.noecho()
     curses.cbreak()
 
