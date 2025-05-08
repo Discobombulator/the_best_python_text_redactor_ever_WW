@@ -1,14 +1,15 @@
 from control.controller import start_controller
 from logic.read_texts import read_cnf
 from visual.main_scene import main_scene
+import curses
 
 
-def start_scene(std):
+def start_scene(std: curses.window):
     lines = read_cnf("start_scene")
     std.clear()
 
     for i in range(len(lines)):
-        std.addstr(i+4, 0, lines[i])
+        std.addstr(i + 4, 0, lines[i])
 
     std.refresh()
     type_text = start_controller(std)
@@ -19,4 +20,3 @@ def start_scene(std):
         return main_scene(std, type_text)
     elif type_text == "olf_f":
         return main_scene(std, type_text)
-
