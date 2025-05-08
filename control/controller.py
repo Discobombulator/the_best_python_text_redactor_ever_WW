@@ -52,7 +52,7 @@ def new_name_check(std: curses.window):
         return "confirm"
 
 
-def logic_controller(std: curses.window, text: str, cursor_y: int,
+def logic_controller(std: curses.window, text: list, cursor_y: int,
                      cursor_x: int, key: int):
     # max_y, max_x = std.getmaxyx()
 
@@ -68,14 +68,12 @@ def logic_controller(std: curses.window, text: str, cursor_y: int,
         elif cursor_y > 0:
             cursor_y -= 1
             cursor_x = len(text[cursor_y])
-        return text, cursor_y, cursor_x
     elif key == curses.KEY_RIGHT:
         if cursor_x < len(text[cursor_y]):
             cursor_x += 1
         elif cursor_y < len(text) - 1:
             cursor_y += 1
             cursor_x = 0
-        return text, cursor_y, cursor_x
 
     # Обработка Enter (новая строка)
     elif key in (curses.KEY_ENTER, 10, 13):
@@ -84,7 +82,6 @@ def logic_controller(std: curses.window, text: str, cursor_y: int,
         text.insert(cursor_y + 1, new_line)
         cursor_y += 1
         cursor_x = 0
-        return text, cursor_y, cursor_x
 
     # Backspace
     elif key in (curses.KEY_BACKSPACE, 127, 8):
@@ -98,7 +95,14 @@ def logic_controller(std: curses.window, text: str, cursor_y: int,
             del text[cursor_y]
             cursor_y -= 1
             cursor_x = prev_line_len
-        return text, cursor_y, cursor_x
+
+    # Delete key
+    elif key == curses.KEY_DC:
+        if cursor_x < len(text[cursor_y]):
+            text[cursor_y] = text[cursor_y][:cursor_x] + text[cursor_y][cursor_x + 1:]
+        elif cursor_y < len(text) - 1:
+            text[cursor_y] += text[cursor_y + 1]
+            del text[cursor_y + 1]
 
     # Ввод обычных символов
     elif 32 <= key <= 0x10FFFF:  # Широкий диапазон для Unicode
