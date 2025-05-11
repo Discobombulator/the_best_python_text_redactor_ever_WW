@@ -1,5 +1,10 @@
 import curses.ascii
 
+from logic.hotkeys_maneger import HotkeysManager
+
+# Загружаем менеджер горячих клавиш
+hotkeys_manager = HotkeysManager()
+
 
 def start_controller(std):
     key = std.getch()
@@ -7,19 +12,28 @@ def start_controller(std):
         return "new_f"
     elif key in [ord('2'), ord('@')]:
         return "olf_f"
+    elif key in [ord('3'), ord('#')]:
+        return "hotkeys"
     elif key in [ord('q'), ord('й')]:
         return "exit"
 
 
 def main_controller(std):
     key = std.getch()
-    if key == curses.ascii.ctrl(83) or key == curses.ascii.ctrl(115):
+
+    # Используем менеджер горячих клавиш для проверки комбинаций
+    save_key = hotkeys_manager.get_key_code("save")
+    save_how_key = hotkeys_manager.get_key_code("save_how")
+    exit_save_key = hotkeys_manager.get_key_code("exit_save")
+    exit_no_save_key = hotkeys_manager.get_key_code("exit_no_save")
+
+    if key == save_key:
         return "save"
-    elif key == curses.ascii.ctrl(80) or key == curses.ascii.ctrl(112):
+    elif key == save_how_key:
         return "save_how"
-    elif key == curses.ascii.ctrl(82) or key == curses.ascii.ctrl(114):
+    elif key == exit_save_key:
         return "exit_save"
-    elif key == curses.ascii.ctrl(81) or key == curses.ascii.ctrl(113):
+    elif key == exit_no_save_key:
         return "exit_no_save"
 
 
@@ -34,14 +48,8 @@ def no_save_check(std):
 def new_name_check(std):
     key = std.getch()
 
-    if key == curses.ascii.ctrl(83) or key == curses.ascii.ctrl(115):
+    # Используем менеджер горячих клавиш для подтверждения
+    confirm_key = hotkeys_manager.get_key_code("confirm")
+
+    if key == confirm_key:
         return "confirm"
-
-
-def logic_controller(std):
-    """TODO:
-        Метод для управления редактирования текста
-        1 менять положение курсорв
-        2 переписывать буквы
-        3...
-    """
