@@ -13,7 +13,7 @@ class SettingsManager:
                 "save_as": 16,  # Ctrl+P
                 "exit_save": 18,  # Ctrl+R
                 "exit_no_save": 17,  # Ctrl+Q
-                "settings": 15  # Ctrl+O
+                "settings": 2   # Ctrl+B
             }
         }
         self.settings = self.load_settings()

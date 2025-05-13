@@ -4,6 +4,7 @@ from control.controller import logic_controller
 from control.settings_controller import settings_controller
 from logic.chech_esc_buttons import is_program_end
 from visual.settings_scene import settings_scene
+from visual.main_settings_scene import main_settings_scene
 from logic.settings_manager import settings_manager
 
 
@@ -130,7 +131,8 @@ def main_scene(std: curses.window, text_type: str):
             continue
 
         if key == hotkey_settings:
-            settings_scene(std)
+            # Вместо вызова settings_scene теперь вызываем main_settings_scene
+            main_settings_scene(std)
             # Обновляем горячие клавиши после выхода из настроек
             hotkey_save = settings_manager.get_hotkey("save")
             hotkey_save_as = settings_manager.get_hotkey("save_as")
