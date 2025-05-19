@@ -33,7 +33,8 @@ def main_controller(std: curses.window):
         return "exit_save"
     elif key == 17:  # Ctrl+Q
         return "exit_no_save"
-    return None
+    elif key == 15:  # Ctrl+O
+        return "settings"
 
 
 def no_save_check(std: curses.window):
