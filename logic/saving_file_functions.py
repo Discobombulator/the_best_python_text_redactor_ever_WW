@@ -1,16 +1,22 @@
+from logic.text_collor_changer import text_color_manager
 import curses
-
 from visual.exit_and_save_scene import make_file_name_scene
 
 
 def save_text(lines: list[str], name: str):
     with open(name + ".txt", "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
+    # Сохраняем цвет текста
+    text_color_manager.save_color(name + ".txt")
 
 
 def save_text_no_name(std: curses.window, lines: list[str]):
-    with open(make_file_name(std) + ".txt", "w", encoding="utf-8") as f:
+    filename = make_file_name(std)
+    with open(filename + ".txt", "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
+    # Сохраняем цвет по умолчанию для нового файла
+    text_color_manager.save_color(filename + ".txt")
+    return filename
 
 
 def make_file_name(std: curses.window):
