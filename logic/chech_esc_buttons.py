@@ -31,6 +31,18 @@ def is_program_end(std: curses.window, text_type: str, text: list[str],
     std.timeout(50)
     std.nodelay(True)
 
+def is_program_end(std: curses.window, text_type: str, text: list[str],
+                   name: str):
+    # Отключаем таймаут на время проверки выхода
+    std.timeout(-1)
+    std.nodelay(False)
+
+    end_type = main_controller(std)
+
+    # Восстанавливаем настройки
+    std.timeout(50)
+    std.nodelay(True)
+
     if end_type == "exit_no_save":
         if exit_no_save(std) == "exit_no_save":
             return "exit"
